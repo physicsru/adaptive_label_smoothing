@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns#">
+<head>
+<meta charset="UTF-8"><script type="text/javascript">window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var o=n[t]={exports:{}};e[t][0].call(o.exports,function(n){var o=e[t][1][n];return r(o||n)},o,o.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<t.length;o++)r(t[o]);return r}({1:[function(e,n,t){function r(){}function o(e,n,t){return function(){return i(e,[c.now()].concat(u(arguments)),n?null:this,t),n?void 0:this}}var i=e("handle"),a=e(3),u=e(4),f=e("ee").get("tracer"),c=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],d="api-",l=d+"ixn-";a(p,function(e,n){s[n]=o(d+n,!0,"api")}),s.addPageAction=o(d+"addPageAction",!0),s.setCurrentRouteName=o(d+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,o="function"==typeof n;return i(l+"tracer",[c.now(),e,t],r),function(){if(f.emit((o?"":"no-")+"fn-start",[c.now(),r,o],t),o)try{return n.apply(this,arguments)}catch(e){throw f.emit("fn-err",[arguments,this,e],t),e}finally{f.emit("fn-end",[c.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=o(l+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),i("err",[e,c.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){if(!o)return!1;if(e!==o)return!1;if(!n)return!0;if(!i)return!1;for(var t=i.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var o=null,i=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var u=navigator.userAgent,f=u.match(a);f&&u.indexOf("Chrome")===-1&&u.indexOf("Chromium")===-1&&(o="Safari",i=f[1])}n.exports={agent:o,version:i,match:r}},{}],3:[function(e,n,t){function r(e,n){var t=[],r="",i=0;for(r in e)o.call(e,r)&&(t[i]=n(r,e[r]),i+=1);return t}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],4:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,o=t-n||0,i=Array(o<0?0:o);++r<o;)i[r]=e[n+r];return i}n.exports=r},{}],5:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function o(e){function n(e){return e&&e instanceof r?e:e?f(e,u,i):i()}function t(t,r,o,i){if(!d.aborted||i){e&&e(t,r,o);for(var a=n(o),u=v(t),f=u.length,c=0;c<f;c++)u[c].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function l(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||o(t)}function w(e,n){c(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:l,addEventListener:l,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function i(){return new r}function a(){(s.api||s.feature)&&(d.aborted=!0,s=d.backlog={})}var u="nr@context",f=e("gos"),c=e(3),s={},p={},d=n.exports=o();d.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(o.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return e[n]=r,r}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){o.buffer([e],r),o.emit(e,n,t)}var o=e("ee").get("handle");n.exports=r,r.ee=o},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,i,function(){return o++})}var o=1,i="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!E++){var e=x.info=NREUM.info,n=l.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();c(y,function(n,t){e[n]||(e[n]=t)}),f("mark",["onload",a()+x.offset],null,"api");var t=l.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function o(){"complete"===l.readyState&&i()}function i(){f("mark",["domContent",a()+x.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(u=Math.max((new Date).getTime(),u))-x.offset}var u=(new Date).getTime(),f=e("handle"),c=e(3),s=e("ee"),p=e(2),d=window,l=d.document,m="addEventListener",v="attachEvent",g=d.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:d.setImmediate,CT:clearTimeout,XHR:g,REQ:d.Request,EV:d.Event,PR:d.Promise,MO:d.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1130.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),x=n.exports={offset:u,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),l[m]?(l[m]("DOMContentLoaded",i,!1),d[m]("load",r,!1)):(l[v]("onreadystatechange",o),d[v]("onload",r)),f("mark",["firstbyte",u],null,"api");var E=0,O=e(5)},{}]},{},["loader"]);</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+
+<title>Anaconda Python/R Distribution - Free Download</title>
+
+<!-- This site is optimized with the Yoast SEO plugin v9.0.2 - https://yoast.com/wordpress/plugins/seo/ -->
+<meta name="description" content="Anaconda Distribution is the world&#039;s most popular Python data science platform. Download the free version to access over 1500 data science packages and manage libraries and dependencies with Conda."/>
+<link rel="canonical" href="https://www.anaconda.com/distribution/" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Anaconda Python/R Distribution - Free Download" />
+<meta property="og:description" content="Anaconda Distribution is the world&#039;s most popular Python data science platform. Download the free version to access over 1500 data science packages and manage libraries and dependencies with Conda." />
+<meta property="og:url" content="https://www.anaconda.com/distribution/" />
+<meta property="og:site_name" content="Anaconda" />
+<meta property="article:publisher" content="https://www.facebook.com/anacondainc/" />
+<meta property="og:image" content="https://www.anaconda.com/wp-content/uploads/2018/11/distro-01-1.png" />
+<meta property="og:image:secure_url" content="https://www.anaconda.com/wp-content/uploads/2018/11/distro-01-1.png" />
+<script type='application/ld+json'>{"@context":"https:\/\/schema.org","@type":"Organization","url":"https:\/\/www.anaconda.com\/","sameAs":["https:\/\/www.facebook.com\/anacondainc\/","https:\/\/www.linkedin.com\/company\/anacondainc","https:\/\/www.youtube.com\/channel\/UCND4vKhJssAtK8p1Blfj14Q","https:\/\/twitter.com\/anacondainc"],"@id":"https:\/\/www.anaconda.com\/#organization","name":"Anaconda Inc","logo":"https:\/\/www.anaconda.com\/wp-content\/uploads\/2018\/05\/Anaconda-Twitter-Card-01.jpg"}</script>
+<!-- / Yoast SEO plugin. -->
+
+<link rel='dns-prefetch' href='//www.anaconda.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Anaconda &raquo; Feed" href="https://www.anaconda.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Anaconda &raquo; Comments Feed" href="https://www.anaconda.com/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.anaconda.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='custom-new-style-css'  href='https://www.anaconda.com/wp-content/themes/anaconda2/assets/css/unminified/new-style.css?ver=1.4.0' type='text/css' media='all' />
+<link rel='stylesheet' id='slick-style-css'  href='https://www.anaconda.com/wp-content/themes/anaconda2/assets/css/unminified/slick.css?ver=1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='slick-theme-style-css'  href='https://www.anaconda.com/wp-content/themes/anaconda2/assets/css/unminified/slick-theme.css?ver=1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='prism-style-css'  href='https://www.anaconda.com/wp-content/themes/anaconda2/assets/css/minified/prism.css?ver=1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='anaconda-css'  href='https://www.anaconda.com/wp-content/themes/anaconda2/extends/css/anaconda.css?ver=1.02' type='text/css' media='all' />
+<link rel='stylesheet' id='astra-theme-css-css'  href='https://www.anaconda.com/wp-content/themes/anaconda2/assets/css/minified/style.min.css?ver=1.3.3' type='text/css' media='all' />
+<style id='astra-theme-css-inline-css' type='text/css'>
+html{font-size:100%;}a,.page-title{color:#41c932;}a:hover,a:focus{color:#3a3a3a;}body,button,input,select,textarea{font-family:Helvetica,Verdana,Arial,sans-serif;font-weight:400;font-size:16px;font-size:1rem;}blockquote{border-color:rgba(65,201,50,0.05);}.site-title{font-size:35px;font-size:2.1875rem;}#masthead .site-logo-img .custom-logo-link img{max-width:600px;}.astra-logo-svg{width:600px;}.ast-archive-description .ast-archive-title{font-size:40px;font-size:2.5rem;}.site-header .site-description{font-size:15px;font-size:0.9375rem;}.entry-title{font-size:30px;font-size:1.875rem;}.comment-reply-title{font-size:26px;font-size:1.625rem;}.ast-comment-list #cancel-comment-reply-link{font-size:16px;font-size:1rem;}h1,.entry-content h1,.entry-content h1 a{font-size:48px;font-size:3rem;}h2,.entry-content h2,.entry-content h2 a{font-size:42px;font-size:2.625rem;}h3,.entry-content h3,.entry-content h3 a{font-size:30px;font-size:1.875rem;}h4,.entry-content h4,.entry-content h4 a{font-size:20px;font-size:1.25rem;}h5,.entry-content h5,.entry-content h5 a{font-size:18px;font-size:1.125rem;}h6,.entry-content h6,.entry-content h6 a{font-size:15px;font-size:0.9375rem;}.ast-single-post .entry-title,.page-title{font-size:30px;font-size:1.875rem;}#secondary,#secondary button,#secondary input,#secondary select,#secondary textarea{font-size:16px;font-size:1rem;}::selection{background-color:#43c43c;color:#000000;}body,h1,.entry-title a,.entry-content h1,.entry-content h1 a,h2,.entry-content h2,.entry-content h2 a,h3,.entry-content h3,.entry-content h3 a,h4,.entry-content h4,.entry-content h4 a,h5,.entry-content h5,.entry-content h5 a,h6,.entry-content h6,.entry-content h6 a{color:#3a3a3a;}.tagcloud a:hover,.tagcloud a:focus,.tagcloud a.current-item{color:#000000;border-color:#41c932;background-color:#41c932;}.main-header-menu a,.ast-header-custom-item a{color:#3a3a3a;}.main-header-menu li:hover > a,.main-header-menu li:hover > .ast-menu-toggle,.main-header-menu .ast-masthead-custom-menu-items a:hover,.main-header-menu li.focus > a,.main-header-menu li.focus > .ast-menu-toggle,.main-header-menu .current-menu-item > a,.main-header-menu .current-menu-ancestor > a,.main-header-menu .current_page_item > a,.main-header-menu .current-menu-item > .ast-menu-toggle,.main-header-menu .current-menu-ancestor > .ast-menu-toggle,.main-header-menu .current_page_item > .ast-menu-toggle{color:#41c932;}input:focus,input[type="text"]:focus,input[type="email"]:focus,input[type="url"]:focus,input[type="password"]:focus,input[type="reset"]:focus,input[type="search"]:focus,textarea:focus{border-color:#41c932;}input[type="radio"]:checked,input[type=reset],input[type="checkbox"]:checked,input[type="checkbox"]:hover:checked,input[type="checkbox"]:focus:checked,input[type=range]::-webkit-slider-thumb{border-color:#41c932;background-color:#41c932;box-shadow:none;}.site-footer a:hover + .post-count,.site-footer a:focus + .post-count{background:#41c932;border-color:#41c932;}.ast-comment-meta{line-height:1.666666667;font-size:13px;font-size:0.8125rem;}.single .nav-links .nav-previous,.single .nav-links .nav-next,.single .ast-author-details .author-title,.ast-comment-meta{color:#41c932;}.menu-toggle,button,.ast-button,.button,input#submit,input[type="button"],input[type="submit"],input[type="reset"]{border-radius:2px;padding:10px 40px;color:#ffffff;border-color:#81d742;background-color:#81d742;}button:focus,.menu-toggle:hover,button:hover,.ast-button:hover,.button:hover,input[type=reset]:hover,input[type=reset]:focus,input#submit:hover,input#submit:focus,input[type="button"]:hover,input[type="button"]:focus,input[type="submit"]:hover,input[type="submit"]:focus{color:#ffffff;border-color:#81d742;background-color:#81d742;}.search-submit,.search-submit:hover,.search-submit:focus{color:#000000;background-color:#41c932;}.entry-meta,.entry-meta *{line-height:1.45;color:#41c932;}.entry-meta a:hover,.entry-meta a:hover *,.entry-meta a:focus,.entry-meta a:focus *{color:#3a3a3a;}blockquote,blockquote a{color:#000000;}.ast-404-layout-1 .ast-404-text{font-size:200px;font-size:12.5rem;}.widget-title{font-size:22px;font-size:1.375rem;color:#3a3a3a;}#cat option,.secondary .calendar_wrap thead a,.secondary .calendar_wrap thead a:visited{color:#41c932;}.secondary .calendar_wrap #today,.ast-progress-val span{background:#41c932;}.secondary a:hover + .post-count,.secondary a:focus + .post-count{background:#41c932;border-color:#41c932;}.calendar_wrap #today > a{color:#000000;}.ast-pagination a,.page-links .page-link,.single .post-navigation a{color:#41c932;}.ast-pagination a:hover,.ast-pagination a:focus,.ast-pagination > span:hover:not(.dots),.ast-pagination > span.current,.page-links > .page-link,.page-links .page-link:hover,.post-navigation a:hover{color:#3a3a3a;}@media (min-width:545px){.ast-page-builder-template .comments-area,.single.ast-page-builder-template .entry-header,.single.ast-page-builder-template .post-navigation{max-width:1280px;margin-left:auto;margin-right:auto;}}@media (max-width:768px){.ast-archive-description .ast-archive-title{font-size:40px;}.entry-title{font-size:30px;}h1,.entry-content h1,.entry-content h1 a{font-size:30px;}h2,.entry-content h2,.entry-content h2 a{font-size:25px;}h3,.entry-content h3,.entry-content h3 a{font-size:20px;}.ast-single-post .entry-title,.page-title{font-size:30px;}}@media (max-width:544px){.ast-archive-description .ast-archive-title{font-size:40px;}.entry-title{font-size:30px;}h1,.entry-content h1,.entry-content h1 a{font-size:30px;}h2,.entry-content h2,.entry-content h2 a{font-size:25px;}h3,.entry-content h3,.entry-content h3 a{font-size:20px;}.ast-single-post .entry-title,.page-title{font-size:30px;}}@media (max-width:768px){html{font-size:91.2%;}}@media (max-width:544px){html{font-size:91.2%;}}@media (min-width:769px){.ast-container{max-width:1280px;}}@font-face {font-family: "Astra";src: url( https://www.anaconda.com/wp-content/themes/anaconda2/assets/fonts/astra.woff) format("woff"),url( https://www.anaconda.com/wp-content/themes/anaconda2/assets/fonts/astra.ttf) format("truetype"),url( https://www.anaconda.com/wp-content/themes/anaconda2/assets/fonts/astra.svg#astra) format("svg");font-weight: normal;font-style: normal;}.ast-small-footer{border-top-style:solid;border-top-width:1px;border-top-color:#7a7a7a;}.ast-small-footer-wrap{text-align:center;}@media (max-width:920px){.ast-404-layout-1 .ast-404-text{font-size:100px;font-size:6.25rem;}}
+.ast-header-break-point .site-header{border-bottom-width:1px;}@media (min-width:769px){.main-header-bar{border-bottom-width:1px;}}
+.main-header-bar-wrap::before {content: '921';}@media all and ( min-width: 921px ) {.main-header-bar-wrap::before {content: '';}}
+</style>
+<link rel='stylesheet' id='toolset_bootstrap_styles-css'  href='https://www.anaconda.com/wp-content/plugins/layouts/vendor/toolset/toolset-common/res/lib/bootstrap/css/bootstrap.css?ver=3.2.4' type='text/css' media='screen' />
+<link rel='stylesheet' id='menu-cells-front-end-css'  href='https://www.anaconda.com/wp-content/plugins/layouts/resources/css/cell-menu-css.css?ver=2.4.3' type='text/css' media='screen' />
+<link rel='stylesheet' id='ddl-front-end-css'  href='https://www.anaconda.com/wp-content/plugins/layouts/resources/css/ddl-front-end.css?ver=2.4.3' type='text/css' media='screen' />
+<link rel='stylesheet' id='toolset-common-css'  href='https://www.anaconda.com/wp-content/plugins/layouts/vendor/toolset/toolset-common/res/css/toolset-common.css?ver=3.2.4' type='text/css' media='screen' />
+<link rel='stylesheet' id='mediaelement-css'  href='https://www.anaconda.com/wp-includes/js/mediaelement/mediaelementplayer-legacy.min.css?ver=4.2.6-78496d1' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-mediaelement-css'  href='https://www.anaconda.com/wp-includes/js/mediaelement/wp-mediaelement.min.css?ver=4.9.8' type='text/css' media='all' />
+<link rel='stylesheet' id='views-pagination-style-css'  href='https://www.anaconda.com/wp-content/plugins/wp-views/embedded/res/css/wpv-pagination.css?ver=2.6' type='text/css' media='all' />
+<style id='views-pagination-style-inline-css' type='text/css'>
+.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-default > span.wpv-sort-list,.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-default .wpv-sort-list-item {border-color: #cdcdcd;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-default .wpv-sort-list-item a {color: #444;background-color: #fff;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-default a:hover,.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-default a:focus {color: #000;background-color: #eee;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-default .wpv-sort-list-item.wpv-sort-list-current a {color: #000;background-color: #eee;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-grey > span.wpv-sort-list,.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-grey .wpv-sort-list-item {border-color: #cdcdcd;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-grey .wpv-sort-list-item a {color: #444;background-color: #eeeeee;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-grey a:hover,.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-grey a:focus {color: #000;background-color: #e5e5e5;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-grey .wpv-sort-list-item.wpv-sort-list-current a {color: #000;background-color: #e5e5e5;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-blue > span.wpv-sort-list,.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-blue .wpv-sort-list-item {border-color: #0099cc;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-blue .wpv-sort-list-item a {color: #444;background-color: #cbddeb;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-blue a:hover,.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-blue a:focus {color: #000;background-color: #95bedd;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-blue .wpv-sort-list-item.wpv-sort-list-current a {color: #000;background-color: #95bedd;}
+</style>
+<link rel='stylesheet' id='onthego-admin-styles-css'  href='https://www.anaconda.com/wp-content/plugins/types/vendor/toolset/onthego-resources/onthego-styles/onthego-styles.css?ver=3.2.4' type='text/css' media='screen' />
+<link rel='stylesheet' id='addtoany-css'  href='https://www.anaconda.com/wp-content/plugins/add-to-any/addtoany.min.css?ver=1.15' type='text/css' media='all' />
+<style id='addtoany-inline-css' type='text/css'>
+.a2a_kit .a2a_svg{
+	padding: 4px;
+	border-radius: 50% !important;
+}
+</style>
+<link property='stylesheet' rel='stylesheet' id='wp_ddl_layout_fe_css-css'  href='https://www.anaconda.com/wp-content/uploads/ddl-layouts-tmp/9a8b69b6f9fb70d3ba7832bc3aa0f563.css?ver=2.4.3' type='text/css' media='screen' />
+<script type='text/javascript' src='https://www.anaconda.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='https://www.anaconda.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript' src='https://www.anaconda.com/wp-content/plugins/add-to-any/addtoany.min.js?ver=1.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var DDLayout_fe_settings = {"DDL_JS":{"css_framework":"bootstrap-3","DEBUG":false}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.anaconda.com/wp-content/plugins/layouts/resources/js/ddl-layouts-frontend.js?ver=2.4.3'></script>
+<script type='text/javascript'>
+var mejsL10n = {"language":"en","strings":{"mejs.install-flash":"You are using a browser that does not have Flash player enabled or installed. Please turn on your Flash player plugin or download the latest version from https:\/\/get.adobe.com\/flashplayer\/","mejs.fullscreen-off":"Turn off Fullscreen","mejs.fullscreen-on":"Go Fullscreen","mejs.download-video":"Download Video","mejs.fullscreen":"Fullscreen","mejs.time-jump-forward":["Jump forward 1 second","Jump forward %1 seconds"],"mejs.loop":"Toggle Loop","mejs.play":"Play","mejs.pause":"Pause","mejs.close":"Close","mejs.time-slider":"Time Slider","mejs.time-help-text":"Use Left\/Right Arrow keys to advance one second, Up\/Down arrows to advance ten seconds.","mejs.time-skip-back":["Skip back 1 second","Skip back %1 seconds"],"mejs.captions-subtitles":"Captions\/Subtitles","mejs.captions-chapters":"Chapters","mejs.none":"None","mejs.mute-toggle":"Mute Toggle","mejs.volume-help-text":"Use Up\/Down Arrow keys to increase or decrease volume.","mejs.unmute":"Unmute","mejs.mute":"Mute","mejs.volume-slider":"Volume Slider","mejs.video-player":"Video Player","mejs.audio-player":"Audio Player","mejs.ad-skip":"Skip ad","mejs.ad-skip-info":["Skip in 1 second","Skip in %1 seconds"],"mejs.source-chooser":"Source Chooser","mejs.stop":"Stop","mejs.speed-rate":"Speed Rate","mejs.live-broadcast":"Live Broadcast","mejs.afrikaans":"Afrikaans","mejs.albanian":"Albanian","mejs.arabic":"Arabic","mejs.belarusian":"Belarusian","mejs.bulgarian":"Bulgarian","mejs.catalan":"Catalan","mejs.chinese":"Chinese","mejs.chinese-simplified":"Chinese (Simplified)","mejs.chinese-traditional":"Chinese (Traditional)","mejs.croatian":"Croatian","mejs.czech":"Czech","mejs.danish":"Danish","mejs.dutch":"Dutch","mejs.english":"English","mejs.estonian":"Estonian","mejs.filipino":"Filipino","mejs.finnish":"Finnish","mejs.french":"French","mejs.galician":"Galician","mejs.german":"German","mejs.greek":"Greek","mejs.haitian-creole":"Haitian Creole","mejs.hebrew":"Hebrew","mejs.hindi":"Hindi","mejs.hungarian":"Hungarian","mejs.icelandic":"Icelandic","mejs.indonesian":"Indonesian","mejs.irish":"Irish","mejs.italian":"Italian","mejs.japanese":"Japanese","mejs.korean":"Korean","mejs.latvian":"Latvian","mejs.lithuanian":"Lithuanian","mejs.macedonian":"Macedonian","mejs.malay":"Malay","mejs.maltese":"Maltese","mejs.norwegian":"Norwegian","mejs.persian":"Persian","mejs.polish":"Polish","mejs.portuguese":"Portuguese","mejs.romanian":"Romanian","mejs.russian":"Russian","mejs.serbian":"Serbian","mejs.slovak":"Slovak","mejs.slovenian":"Slovenian","mejs.spanish":"Spanish","mejs.swahili":"Swahili","mejs.swedish":"Swedish","mejs.tagalog":"Tagalog","mejs.thai":"Thai","mejs.turkish":"Turkish","mejs.ukrainian":"Ukrainian","mejs.vietnamese":"Vietnamese","mejs.welsh":"Welsh","mejs.yiddish":"Yiddish"}};
+</script>
+<script type='text/javascript' src='https://www.anaconda.com/wp-includes/js/mediaelement/mediaelement-and-player.min.js?ver=4.2.6-78496d1'></script>
+<script type='text/javascript' src='https://www.anaconda.com/wp-includes/js/mediaelement/mediaelement-migrate.min.js?ver=4.9.8'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var _wpmejsSettings = {"pluginPath":"\/wp-includes\/js\/mediaelement\/","classPrefix":"mejs-","stretching":"responsive"};
+/* ]]> */
+</script>
+<link rel='https://api.w.org/' href='https://www.anaconda.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.anaconda.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.anaconda.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 4.9.8" />
+<link rel='shortlink' href='https://www.anaconda.com/?p=6662' />
+<link rel="alternate" type="application/json+oembed" href="https://www.anaconda.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.anaconda.com%2Fdistribution%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.anaconda.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.anaconda.com%2Fdistribution%2F&#038;format=xml" />
+
+<script data-cfasync="false">
+window.a2a_config=window.a2a_config||{};a2a_config.callbacks=[];a2a_config.overlays=[];a2a_config.templates={};
+a2a_config.icon_color="#414042";
+(function(d,s,a,b){a=d.createElement(s);b=d.getElementsByTagName(s)[0];a.async=1;a.src="https://static.addtoany.com/menu/page.js";b.parentNode.insertBefore(a,b);})(document,"script");
+</script>
+		<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+		<link rel="icon" href="https://www.anaconda.com/wp-content/uploads/2018/06/cropped-Anaconda_icon_transparent_512x512-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://www.anaconda.com/wp-content/uploads/2018/06/cropped-Anaconda_icon_transparent_512x512-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://www.anaconda.com/wp-content/uploads/2018/06/cropped-Anaconda_icon_transparent_512x512-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.anaconda.com/wp-content/uploads/2018/06/cropped-Anaconda_icon_transparent_512x512-270x270.png" />
+<!-- Cookie Consent -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
+<!-- End Cookie Consent -->
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WJN9BFZ');</script>
+<!-- End Google Tag Manager -->
+</head>
+
+<body itemtype='https://schema.org/WebPage' itemscope='itemscope' class="page-template-default page page-id-6662 wp-custom-logo ast-page-builder-template ast-no-sidebar astra-1.3.3 ast-header-custom-item-inside group-blog ast-single-post ast-normal-title-enabled distribution_page  page_type">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WJN9BFZ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<div id="page" class="hfeed site">
+	<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+	<ul id="top-search" class="accordion bg-dark unmarg pos-top pos-right width-100">
+		<li class="unmarg active">
+			<div class="accordion-content">
+				<form class="search" method="get" action="/" role="search">
+					<section class="space-xs clearfix">
+						<div class="col-sm-8 col-sm-offset-2">
+							<div class="row">
+								<div class="col-sm-10">
+									<input type="search" name="s" placeholder="I'm looking for…" autocomplete="off" value="">
+								</div>
+								<div class="col-sm-2">
+									<button type="submit" class="btn btn-primary">Search</button>
+								</div>
+							</div>
+						</div>
+					</section>
+				</form>
+			</div>
+		</li>
+	</ul>
+
+	
+	
+		<header itemtype="https://schema.org/WPHeader" itemscope="itemscope" id="masthead" class="site-header header-main-layout-1 ast-mobile-header-inline" role="banner">
+
+			
+			
+<div class="main-header-bar-wrap">
+	<div class="main-header-bar">
+				<div class="ast-container">
+
+			<div class="ast-flex main-header-container">
+				
+		<div class="site-branding">
+			<div class="ast-site-identity" itemscope="itemscope" itemtype="https://schema.org/Organization">
+				<span class="site-logo-img"><a href="https://www.anaconda.com/" class="custom-logo-link" rel="home" itemprop="url"><img width="600" height="102" src="https://www.anaconda.com/wp-content/uploads/2018/06/cropped-Anaconda_horizontal_RGB-1-600x102.png" class="custom-logo" alt="Anaconda" itemprop="logo" srcset="" sizes="(max-width: 600px) 100vw, 600px" /></a></span>			</div>
+		</div>
+		<!-- .site-branding -->
+				<div class="ast-mobile-menu-buttons">
+
+			
+					<div class="ast-button-wrap">
+			<button type="button" class="menu-toggle main-header-menu-toggle " rel="main-menu" aria-controls='primary-menu' aria-expanded='false'>
+				<span class="screen-reader-text">Main Menu</span>
+				<i class="menu-toggle-icon"></i>
+							</button>
+		</div>
+	
+			
+		</div>
+		<div class="ast-main-header-bar-alignment"><div class="main-header-bar-navigation"><nav itemtype="https://schema.org/SiteNavigationElement" itemscope="itemscope" id="site-navigation" class="ast-flex-grow-1" role="navigation" aria-label="Site Navigation"><div class="main-navigation"><ul id="primary-menu" class="main-header-menu ast-flex ast-justify-content-flex-end submenu-with-border"><li id="menu-item-7192" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-7192"><a href="/">Products</a>
+<ul class="sub-menu">
+	<li id="menu-item-7194" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-6662 current_page_item menu-item-7194"><a href="https://www.anaconda.com/distribution/">Anaconda Distribution</a></li>
+	<li id="menu-item-7196" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7196"><a href="https://www.anaconda.com/enterprise/">Anaconda Enterprise</a></li>
+</ul>
+</li>
+<li id="menu-item-7193" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7193"><a href="https://www.anaconda.com/why-anaconda/">Why Anaconda?</a></li>
+<li id="menu-item-7197" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7197"><a href="/">Solutions</a>
+<ul class="sub-menu">
+	<li id="menu-item-7341" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7341"><a href="https://www.anaconda.com/use-cases/">Use Cases</a></li>
+	<li id="menu-item-7199" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7199"><a href="https://www.anaconda.com/support/">Support</a></li>
+	<li id="menu-item-7200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7200"><a href="https://www.anaconda.com/training/">Training</a></li>
+	<li id="menu-item-7198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7198"><a href="https://www.anaconda.com/professional-services/">Professional Services</a></li>
+</ul>
+</li>
+<li id="menu-item-7201" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7201"><a href="/">Resources</a>
+<ul class="sub-menu">
+	<li id="menu-item-7202" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7202"><a href="/blog">Blog</a></li>
+	<li id="menu-item-7203" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7203"><a href="/anaconda-webinars">Webinars</a></li>
+	<li id="menu-item-7204" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7204"><a href="/event">Events</a></li>
+	<li id="menu-item-7205" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7205"><a href="/whitepapers">Whitepapers</a></li>
+	<li id="menu-item-7206" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7206"><a href="/videos">Videos</a></li>
+	<li id="menu-item-7207" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7207"><a href="https://www.anaconda.com/anaconda-community/">Community</a></li>
+</ul>
+</li>
+<li id="menu-item-7208" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7208"><a href="/">Company</a>
+<ul class="sub-menu">
+	<li id="menu-item-7209" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7209"><a href="https://www.anaconda.com/about-us/">About Us</a></li>
+	<li id="menu-item-7213" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7213"><a href="https://www.anaconda.com/partners/">Partners</a></li>
+	<li id="menu-item-7214" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7214"><a href="https://www.anaconda.com/anaconda-careers/">Careers</a></li>
+	<li id="menu-item-7212" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7212"><a href="https://www.anaconda.com/media-kit/">Media Kit</a></li>
+	<li id="menu-item-7210" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7210"><a href="https://www.anaconda.com/contact-us/">Contact Us</a></li>
+</ul>
+</li>
+			<li class="ast-masthead-custom-menu-items text-html-custom-menu-item">
+				<div class="ast-custom-html"><a href="/distribution" class="btn-primary">Download</a></div>			</li>
+			
+		<li title="Search">
+		<a href="#" class="search-icon">
+		<i class="fas fa-search"></i>
+		<span class="hidden-lg">Search</span>
+		</a>
+		</li>
+		</ul></div></nav></div></div>			</div><!-- Main Header Container -->
+		</div><!-- ast-row -->
+			</div> <!-- Main Header Bar -->
+</div> <!-- Main Header Bar Wrap -->
+
+			
+		</header><!-- #masthead -->
+		
+	
+	
+	<div class="site-content content" id="content" >
+
+					<div class="default-hero"
+									style="background-image:url( https://www.anaconda.com/wp-content/uploads/2018/08/Group-490.png );"
+								>
+				<div class="container">
+											<p><h1>Anaconda Distribution</h1>
+The World's Most Popular Python/R Data Science Platform
+
+<a style="display: inline-block;" href="#download-section">Download</a></p>
+									</div>
+			</div>
+				<div class="ast-container">
+
+		
+
+	<div id="primary" class="content-area primary">
+
+		
+					<main id="main" class="site-main" role="main">
+
+				
+					
+					
+
+<article itemtype="https://schema.org/CreativeWork" itemscope="itemscope" id="post-6662" class="post-6662 page type-page status-publish ast-article-single">
+
+	
+<!-- 	<header class="entry-header ">
+
+		
+			</header>-->
+
+	<div class="entry-content clear" itemprop="text">
+
+		
+		                <div class="container-fluid ">
+                <div class="ddl-full-width-row row "  >
+                <div class="col-sm-12"><div class="container ">
+<div class="row section-top ddl-frontend-editor-row ddl-frontend-editor-editable" data-id="11" data-name="Post content row" data-type="row" data-layout_slug="" data-kind="Row">
+<div class="col-sm-6 ddl-frontend-editor-cell ddl-frontend-editor-editable js-ddl-frontend-editor-cell" data-id="s5196" data-name="Visual Editor" data-type="cell-text" data-layout_slug="" data-kind="Cell"> The open-source <a href="https://docs.anaconda.com/anaconda/">Anaconda Distribution</a> is the easiest way to perform Python/R data science and machine learning on Linux, Windows, and Mac OS X. With over 15 million users worldwide, it is the industry standard for developing, testing, and training on a single machine, enabling <em>individual data scientists</em> to: </p>
+<ul class="ml40">
+<li>Quickly download 1,500+ Python/R data science packages</li>
+<li>Manage libraries, dependencies, and environments with <a href="https://conda.io/docs/">Conda</a></li>
+<li>Develop and train machine learning and deep learning models with <a href="https://scikit-learn.org/stable/">scikit-learn</a>, <a href="https://www.tensorflow.org/">TensorFlow</a>, and <a href="https://pypi.org/project/Theano/">Theano</a></li>
+<li>Analyze data with scalability and performance with <a href="https://dask.org/">Dask</a>, <a href="http://www.numpy.org/">NumPy</a>, <a href="https://pandas.pydata.org/">pandas</a>, and <a href="http://numba.pydata.org/">Numba</a></li>
+<li>Visualize results with <a href="https://matplotlib.org/">Matplotlib</a>, <a href="https://bokeh.pydata.org/en/latest/">Bokeh</a>, <a href="http://datashader.org/">Datashader</a>, and <a href="http://holoviews.org/">Holoviews</a></li>
+</ul></div>
+<div class="col-sm-6 ddl-frontend-editor-cell ddl-frontend-editor-editable js-ddl-frontend-editor-cell" data-id="s5208" data-name="Image" data-type="imagebox-cell" data-layout_slug="" data-kind="Cell"> <img class=" img-responsive aligncenter" src="https://www.anaconda.com/wp-content/uploads/2018/11/distro-01-1.png" alt="Anaconda-Open-Source-Projects" /> </div>
+</p></div>
+</p></div>
+<div id="download-section" class="full-bg section-bottom gray-bg ddl-frontend-editor-row ddl-frontend-editor-editable" data-id="9872" data-name="Row 9" data-type="row" data-layout_slug="" data-kind="Row">
+<div class="container ">
+<div class="row">
+<div class="col-sm-12 ddl-frontend-editor-cell ddl-frontend-editor-editable js-ddl-frontend-editor-cell" data-id="s9848" data-name="Visual Editor 3" data-type="cell-text" data-layout_slug="" data-kind="Cell"> <div class="minh65">
+		<div class="content-nav inline-nav sticky tab-list">
+				<ul role="tablist">
+					<li role="presentation"><a href="#windows" aria-controls="windows" role="tab" data-toggle="tab" aria-expanded="false"><i class="fab fa-windows"></i>Windows</a></li>
+					<li role="presentation" class="active"><a href="#macos" aria-controls="macos" role="tab" data-toggle="tab" aria-expanded="false"><i class="fab fa-apple fa-2x"></i>macOS</a></li>
+					<li role="presentation"><a href="#linux" aria-controls="linux" role="tab" data-toggle="tab" aria-expanded="false"><i class="fab fa-linux"></i>Linux</a></li>
+				</ul>
+			</div>
+		</div><div class="tab-content section-top"><div role="tabpanel" class="tab-pane fade in active" id="macos">
+					<h2 style="text-align: center;">Anaconda 2019.07 for macOS Installer</h2>
+					<div class="clear section-top">
+
+						<div class="col-sm-4 col-sm-offset-2">
+							<div class="card-white">
+								<h2 style="text-align: center;">Python 3.7 version</h2>
+								<p style="text-align: center;"><a class="more" href="https://repo.anaconda.com/archive/Anaconda3-2019.07-MacOSX-x86_64.pkg">Download</a></p><p style="text-align: center;"><a href="https://repo.anaconda.com/archive/Anaconda3-2019.07-MacOSX-x86_64.pkg">64-Bit Graphical Installer (653 MB)</a></p><p style="text-align: center;"><a href="https://repo.anaconda.com/archive/Anaconda3-2019.07-MacOSX-x86_64.sh">64-Bit Command Line Installer (435 MB)</a></p></div>
+						</div>
+
+						<div class="col-sm-4">
+							<div class="card-white">
+								<h2 style="text-align: center;">Python 2.7 version</h2>
+								<p style="text-align: center;"><a class="more" href=" https://repo.anaconda.com/archive/Anaconda2-2019.07-MacOSX-x86_64.pkg">Download</a></p><p style="text-align: center;"><a href=" https://repo.anaconda.com/archive/Anaconda2-2019.07-MacOSX-x86_64.pkg">64-Bit Graphical Installer (634 MB)</a></p><p style="text-align: center;"><a href="https://repo.anaconda.com/archive/Anaconda2-2019.07-MacOSX-x86_64.sh">64-Bit Command Line Installer (408 MB  )</a></p></div>
+						</div>
+
+					</div>
+				</div><div role="tabpanel" class="tab-pane fade" id="windows">
+					<h2 style="text-align: center;">Anaconda 2019.07 for Windows Installer</h2>
+					<div class="clear section-top">
+
+						<div class="col-sm-4 col-sm-offset-2">
+							<div class="card-white">
+								<h2 style="text-align: center;">Python 3.7 version</h2>
+								<p style="text-align: center;"><a class="more" href=" https://repo.anaconda.com/archive/Anaconda3-2019.07-Windows-x86_64.exe">Download</a></p><p style="text-align: center;"><a href=" https://repo.anaconda.com/archive/Anaconda3-2019.07-Windows-x86_64.exe">64-Bit Graphical Installer (486 MB)</a></p><p style="text-align: center;"><a href="https://repo.anaconda.com/archive/Anaconda3-2019.07-Windows-x86.exe">32-Bit Graphical Installer (418 MB)</a></p></div>
+						</div>
+
+						<div class="col-sm-4">
+							<div class="card-white">
+								<h2 style="text-align: center;">Python 2.7 version</h2>
+								<p style="text-align: center;"><a class="more" href="https://repo.anaconda.com/archive/Anaconda2-2019.07-Windows-x86_64.exe">Download</a></p><p style="text-align: center;"><a href="https://repo.anaconda.com/archive/Anaconda2-2019.07-Windows-x86_64.exe">64-Bit Graphical Installer (427 MB)</a></p><p style="text-align: center;"><a href="https://repo.anaconda.com/archive/Anaconda2-2019.07-Windows-x86.exe">32-Bit Graphical Installer (361 MB)</a></p></div>
+						</div>
+
+					</div>
+				</div><div role="tabpanel" class="tab-pane fade" id="linux">
+					<h2  style="text-align: center;">Anaconda 2019.07 for Linux Installer</h2>
+					<div class="clear section-top">
+
+						<div class="col-sm-4 col-sm-offset-2">
+							<div class="card-white">
+								<h2 style="text-align: center;">Python 3.7 version</h2>
+								<p style="text-align: center;"><a class="more" href="https://repo.anaconda.com/archive/Anaconda3-2019.07-Linux-x86_64.sh" >Download</a></p><p style="text-align: center;"><a href="https://repo.anaconda.com/archive/Anaconda3-2019.07-Linux-x86_64.sh">64-Bit (x86) Installer (517 MB)</a></p><p style="text-align: center;"><a href="https://repo.anaconda.com/archive/Anaconda3-2019.07-Linux-ppc64le.sh">64-Bit (Power8 and Power9) Installer (326 MB)</a></p></div>
+						</div>
+
+						<div class="col-sm-4">
+							<div class="card-white">
+								<h2 style="text-align: center;">Python 2.7 version</h2>
+								<p style="text-align: center;"><a class="more" href="https://repo.anaconda.com/archive/Anaconda2-2019.07-Linux-x86_64.sh" >Download</a></p><p style="text-align: center;"><a href="https://repo.anaconda.com/archive/Anaconda2-2019.07-Linux-x86_64.sh">64-Bit (x86) Installer (476 MB)</a></p><p style="text-align: center;"><a href="https://repo.anaconda.com/archive/Anaconda2-2019.07-Linux-ppc64le.sh">64-Bit (Power8 and Power9) Installer (298 MB)</a></p></div>
+						</div>
+
+					</div>
+				</div></div> </div>
+</p></div>
+</p></div>
+</p></div>
+<div class="container-fluid ">
+<div class="ddl-full-width-row row section-top no-p-margin ddl-frontend-editor-row ddl-frontend-editor-editable" data-id="6182" data-name="Row 4" data-type="row" data-layout_slug="" data-kind="Row">
+<div class="col-sm-10 ddl-frontend-editor-cell ddl-frontend-editor-editable js-ddl-frontend-editor-cell col-sm-offset-1" data-id="s6552" data-name="Visual Editor 4" data-type="cell-text" data-layout_slug="" data-kind="Cell">
+<h2 style="text-align: center;">Get Started with Anaconda Distribution</h2>
+</p></div>
+</p></div>
+</p></div>
+<div class="full-bg equal pd030pr shadow ddl-frontend-editor-row ddl-frontend-editor-editable" data-id="6740" data-name="Row 6" data-type="row" data-layout_slug="" data-kind="Row">
+<div class="container ">
+<div class="row">
+<div class="col-sm-2 ddl-frontend-editor-cell ddl-frontend-editor-editable js-ddl-frontend-editor-cell col-sm-offset-1" data-id="s6716" data-name="Visual Editor 6" data-type="cell-text" data-layout_slug="" data-kind="Cell">
+<div class="event conferences ">
+<div class="event-category"><strong>Documentation</strong></div>
+<p> Installation and user guide for Anaconda Distribution 5 <a class="more" href="https://docs.anaconda.com/anaconda/">Read More</a> </div>
+</p></div>
+<div class="col-sm-2 ddl-frontend-editor-cell ddl-frontend-editor-editable js-ddl-frontend-editor-cell" data-id="s6722" data-name="Visual Editor 7" data-type="cell-text" data-layout_slug="" data-kind="Cell">
+<div class="event conferences ">
+<div class="event-category"><strong>Anaconda Blog</strong></div>
+<p> News, software releases, and developer best practices <a class="more" href="../blog/">Read More</a> </div>
+</p></div>
+<div class="col-sm-2 ddl-frontend-editor-cell ddl-frontend-editor-editable js-ddl-frontend-editor-cell" data-id="s6728" data-name="Visual Editor 8" data-type="cell-text" data-layout_slug="" data-kind="Cell">
+<div class="event conferences ">
+<div class="event-category"><strong>Community Support</strong></div>
+<p> Solutions and knowledge from the community <a class="more" href="../anaconda-community/">Read More</a> </div>
+</p></div>
+<div class="col-sm-2 ddl-frontend-editor-cell ddl-frontend-editor-editable js-ddl-frontend-editor-cell" data-id="s6734" data-name="Visual Editor 9" data-type="cell-text" data-layout_slug="" data-kind="Cell">
+<div class="event conferences ">
+<div class="event-category"><strong>Anaconda Webinars</strong></div>
+<p> Industry trends and tutorials from Anaconda <a class="more" href="../anaconda-webinars/">Read More</a> </div>
+</p></div>
+<div class="col-sm-2 ddl-frontend-editor-cell ddl-frontend-editor-editable js-ddl-frontend-editor-cell" data-id="s10305" data-name="Visual Editor 2" data-type="cell-text" data-layout_slug="" data-kind="Cell">
+<div class="event conferences ">
+<div class="event-category"><strong>Anaconda Training</strong></div>
+<p> Learn Python for Data Science with DataCamp <a class="more" href="https://www.datacamp.com/learn-python-with-anaconda">Start Learning</a> </div>
+</p></div>
+</p></div>
+</p></div>
+</p></div>
+<div class="container-fluid ">
+<div class="ddl-full-width-row row gray-bg section-top ddl-frontend-editor-row ddl-frontend-editor-editable" data-id="6483" data-name="Row 5" data-type="row" data-layout_slug="" data-kind="Row">
+<div class="col-sm-10 ddl-frontend-editor-cell ddl-frontend-editor-editable js-ddl-frontend-editor-cell col-sm-offset-1" data-id="s7364" data-name="Visual Editor 5" data-type="cell-text" data-layout_slug="" data-kind="Cell">
+<h2 style="text-align: center;">Take Data Science to Your Organization</h2>
+</p></div>
+</p></div>
+</p></div>
+<div class="full-bg equal section-bottom gray-bg ddl-frontend-editor-row ddl-frontend-editor-editable" data-id="7599" data-name="Row 7" data-type="row" data-layout_slug="" data-kind="Row">
+<div class="container ">
+<div class="row">
+<div class="col-sm-5 vertical-center ddl-frontend-editor-cell ddl-frontend-editor-editable js-ddl-frontend-editor-cell col-sm-offset-1" data-id="s7577" data-name="Visual Editor 10" data-type="cell-text" data-layout_slug="" data-kind="Cell"> <a href="../enterprise/">Anaconda Enterprise</a> extends Anaconda Distribution by enabling data science teams to build, train, and deploy models at speed and scale, while fulfilling IT governance and security needs. With Anaconda Enterprise, your organization can: </p>
+<ul class="ml40">
+<li>Harness data science, machine learning, and artificial intelligence at the pace demanded by today’s digital interactions</li>
+<li>Scale from individual data scientists to collaborative teams of thousands, from a single server to thousands of nodes</li>
+<li>Secure open source supply chains with a private package repository</li>
+<li>Deliver actionable insights that propel your business and industry forward</li>
+</ul>
+<p> <a class="more" data-toggle="modal" data-target="#contact-us">Request a Demo</a> </p>
+<div id="contact-us" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-body"><p><!-- Request Demo --> </p>
+<div id="contactSales" data-marketo-form="1" class="text-center" aria-labelledby="mktoFormTitle" aria-hidden="true" role="dialog"> <!-- Heading --> </p>
+<h2 id="mktoFormTitle" class="main-headline mktoFormTitle text-normal">Request a Demo</h2>
+<p> <!-- Marketo Form --> </p>
+<form id="mktoForm_1336"></form>
+<h6 style="text-align: center; margin: 15px 0 0;">Your information will be processed according to Anaconda&#8217;s <a href="/privacy-policy/">Privacy Policy</a></h6>
+<p> <!-- Confirmation --> </p>
+<div class="mktoFormConfirmation">
+<p>Thank you, we will be in touch soon.</p></div>
+</p></div>
+<p><!-- .boxed --></p>
+</div>
+<div class="modal-footer"><button class="btn btn-default" type="button" data-dismiss="modal">Close</button></div>
+</p></div>
+</p></div>
+</p></div>
+</p></div>
+<div class="col-sm-5 hidden-xs ddl-frontend-editor-cell ddl-frontend-editor-editable js-ddl-frontend-editor-cell" data-id="s8356" data-name="Image 2" data-type="imagebox-cell" data-layout_slug="" data-kind="Cell"> <img class=" img-responsive aligncenter" src="https://www.anaconda.com/wp-content/uploads/2018/11/Mac_Mockups@2x.png" /> </div>
+</p></div>
+</p></div>
+</p></div>
+</div></div></div>
+		
+		
+	</div><!-- .entry-content .clear -->
+
+	
+	
+</article><!-- #post-## -->
+
+
+					
+					
+				
+			</main><!-- #main -->
+			
+		
+	</div><!-- #primary -->
+
+
+			
+			</div> <!-- ast-container -->
+
+		</div><!-- #content -->
+
+		
+		
+		<footer id="footer-bottom" class="space-xs bg-dark unpad-bottom">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-7 col-sm-12">
+						<div class="menu-bottom-nav-container"><ul id="menu-footer" class="menu"><li id="menu-item-9780" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9780"><a href="https://www.anaconda.com/enterprise/">Product</a></li>
+<li id="menu-item-7290" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7290"><a href="https://www.anaconda.com/support/">Support</a></li>
+<li id="menu-item-7288" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7288"><a href="https://www.anaconda.com/anaconda-community/">Community</a></li>
+<li id="menu-item-9779" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9779"><a href="https://docs.anaconda.com">Documentation</a></li>
+<li id="menu-item-7287" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7287"><a href="https://www.anaconda.com/anaconda-careers/">Careers</a></li>
+</ul></div>					</div>
+					<div class="col-md-5 col-sm-12 right-align phones">
+						<div id="text-2" class="widget widget_text">			<div class="textwidget"><p>General: <a href="callto:+1 (512) 222-5440">+1 (512) 222-5440</a><br />
+Sales: <a href="callto: +1 (512) 776 1066">+1 (512) 776-1066</a></p>
+</div>
+		</div>					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-7 col-sm-12 copy">
+						<div id="text-3" class="widget widget_text">			<div class="textwidget"><p>© Copyright 2019 Anaconda, Inc. All Rights Reserved. | <a href="../privacy-policy">Privacy Policy </a>| Made with love in Austin, Texas</p>
+</div>
+		</div>					</div>
+					<div class="col-md-5 col-sm-12 social-icons">
+						<div id="custom_html-2" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><a href="https://www.facebook.com/anacondainc"><i class="fab fa-facebook-f"></i></a><a href="https://twitter.com/anacondainc"><i class="fab fa-twitter"></i></a><a href="https://github.com/ContinuumIO"><i class="fab fa-github-alt"></i></a><a href="https://www.instagram.com/anaconda_inc/"><i class="fab fa-instagram"></i></a><a href="https://www.linkedin.com/company/anacondainc/"><i class="fab fa-linkedin-in"></i></a><a href="https://www.youtube.com/c/ContinuumIo"><i class="fab fa-youtube"></i></a></div></div>					</div>
+				</div>
+			</div>
+		</footer>
+
+		
+		
+	</div><!-- #page -->
+
+	
+	<script type="text/html" id="tmpl-wp-playlist-current-item">
+	<# if ( data.image ) { #>
+	<img src="{{ data.thumb.src }}" alt="" />
+	<# } #>
+	<div class="wp-playlist-caption">
+		<span class="wp-playlist-item-meta wp-playlist-item-title">&#8220;{{ data.title }}&#8221;</span>
+		<# if ( data.meta.album ) { #><span class="wp-playlist-item-meta wp-playlist-item-album">{{ data.meta.album }}</span><# } #>
+		<# if ( data.meta.artist ) { #><span class="wp-playlist-item-meta wp-playlist-item-artist">{{ data.meta.artist }}</span><# } #>
+	</div>
+</script>
+<script type="text/html" id="tmpl-wp-playlist-item">
+	<div class="wp-playlist-item">
+		<a class="wp-playlist-caption" href="{{ data.src }}">
+			{{ data.index ? ( data.index + '. ' ) : '' }}
+			<# if ( data.caption ) { #>
+				{{ data.caption }}
+			<# } else { #>
+				<span class="wp-playlist-item-title">&#8220;{{{ data.title }}}&#8221;</span>
+				<# if ( data.artists && data.meta.artist ) { #>
+				<span class="wp-playlist-item-artist"> &mdash; {{ data.meta.artist }}</span>
+				<# } #>
+			<# } #>
+		</a>
+		<# if ( data.meta.length_formatted ) { #>
+		<div class="wp-playlist-item-length">{{ data.meta.length_formatted }}</div>
+		<# } #>
+	</div>
+</script>
+
+<div id="views-extra-css-ie7" style="display:none;" aria-hidden="true">
+<!--[if IE 7]><style>
+.wpv-pagination { *zoom: 1; }
+</style><![endif]-->
+</div>
+
+<script type="text/javascript">
+jQuery( document ).ready( function( $ ) {
+	var extra_css = $( "#views-extra-css" ) ? $( "#views-extra-css" ).text() : null;	if( extra_css ) {		$( 'head' ).append( '<style>' + extra_css + '</style>' );
+		$( "#views-extra-css" ).remove();	}
+	$( 'head' ).append( $( "#views-extra-css-ie7" ).html() );
+	$( "#views-extra-css-ie7" ).remove();});
+</script>
+<script type='text/javascript' src='https://www.anaconda.com/wp-content/themes/anaconda2/assets/js/minified/slick.min.js?ver=0.0.3'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var marketo_fields = {"marketo_id":"387-XNW-688","app_id":"ab14"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.anaconda.com/wp-content/themes/anaconda2/assets/js/unminified/custom.js?ver=0.2.0'></script>
+<script type='text/javascript' src='https://www.anaconda.com/wp-content/themes/anaconda2/assets/js/minified/prism.js?ver=0.0.3'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var astra = {"break_point":"921"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.anaconda.com/wp-content/themes/anaconda2/assets/js/minified/style.min.js?ver=1.3.3'></script>
+<script type='text/javascript' src='https://www.anaconda.com/wp-content/plugins/layouts/vendor/toolset/toolset-common/res/lib/bootstrap/js/bootstrap.min.js?ver=3.3.7'></script>
+<script type='text/javascript' src='https://www.anaconda.com/wp-content/uploads/ddl-layouts-tmp/d41d8cd98f00b204e9800998ecf8427e.js?ver=2.4.3'></script>
+<script type='text/javascript' src='https://www.anaconda.com/wp-includes/js/jquery/ui/core.min.js?ver=1.11.4'></script>
+<script type='text/javascript' src='https://www.anaconda.com/wp-includes/js/jquery/ui/datepicker.min.js?ver=1.11.4'></script>
+<script type='text/javascript'>
+jQuery(document).ready(function(jQuery){jQuery.datepicker.setDefaults({"closeText":"Close","currentText":"Today","monthNames":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthNamesShort":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"nextText":"Next","prevText":"Previous","dayNames":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"dayNamesShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"dayNamesMin":["S","M","T","W","T","F","S"],"dateFormat":"MM d, yy","firstDay":0,"isRTL":false});});
+</script>
+<script type='text/javascript' src='https://www.anaconda.com/wp-includes/js/mediaelement/wp-mediaelement.min.js?ver=4.9.8'></script>
+<script type='text/javascript' src='https://www.anaconda.com/wp-includes/js/underscore.min.js?ver=1.8.3'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var _wpUtilSettings = {"ajax":{"url":"\/wp-admin\/admin-ajax.php"}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.anaconda.com/wp-includes/js/wp-util.min.js?ver=4.9.8'></script>
+<script type='text/javascript' src='https://www.anaconda.com/wp-includes/js/backbone.min.js?ver=1.2.3'></script>
+<script type='text/javascript' src='https://www.anaconda.com/wp-includes/js/mediaelement/wp-playlist.min.js?ver=4.9.8'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var wpv_pagination_local = {"front_ajaxurl":"https:\/\/www.anaconda.com\/wp-admin\/admin-ajax.php","calendar_image":"https:\/\/www.anaconda.com\/wp-content\/plugins\/wp-views\/embedded\/res\/img\/calendar.gif","calendar_text":"Select date","datepicker_min_date":null,"datepicker_max_date":null,"resize_debounce_tolerance":"100","datepicker_style_url":"https:\/\/www.anaconda.com\/wp-content\/plugins\/layouts\/vendor\/toolset\/toolset-common\/toolset-forms\/css\/wpt-jquery-ui\/jquery-ui-1.11.4.custom.css"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.anaconda.com/wp-content/plugins/wp-views/embedded/res/js/wpv-pagination-embedded.js?ver=2.6'></script>
+<script type='text/javascript' src='https://www.anaconda.com/wp-includes/js/wp-embed.min.js?ver=4.9.8'></script>
+<script type='text/javascript' src='https://www.anaconda.com/wp-content/plugins/layouts/resources/js/ddl-tabs-cell-frontend.js?ver=2.4.3'></script>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-27761864-15"></script>
+	<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'UA-27761864-15');
+	</script>
+
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	<!-- Cookie Consent -->
+<script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "#43b02a"
+        },
+        "button": {
+          "background": ""
+        }
+      },
+      "content": {
+        "dismiss": "ACCEPT",
+        "link": "Privacy Policy",
+        "href": "/privacy-policy/"
+      }
+    })});
+</script>
+
+<style>
+    .cc-window.cc-banner {
+        padding: 2rem 2rem;
+        max-width: 1280px;
+        margin: auto;
+        overflow: hidden;
+    }
+    @media (min-width: 720px) {
+        .cc-window.cc-banner {
+            padding: 2rem 6rem 2rem 10rem;
+            overflow: visible;
+        }
+    }
+    .cc-window.cc-banner::after{
+        background-color: #43b02a;
+        content: "";
+        z-index: -10;
+        left: -50%;
+        position: absolute;
+        width: 200%;
+        height: 100%;
+        display: block;
+    }
+    .cc-revoke, .cc-window{
+        font-family: inherit;
+        color: #FFF !important;
+    }
+    .cc-revoke, .cc-window a {
+        font-family: inherit;
+        color: #FFF !important;
+    }
+    .cc-btn {
+        background-color: #047704;
+        padding: 0.5rem 3rem;
+    }
+    .cc-message:before {
+        content: "";
+        background-image: url(/wp-content/themes/anaconda2/assets/images/gdpr-protect.svg);
+        display: none;
+        width: 40px;
+        height: 40px;
+        fill: white;
+        background-size: 100%;
+        position: absolute;
+        left: 100px;
+        top: 33px;
+    }
+    @media (min-width: 720px) {
+        .cc-message:before {
+            display: block;
+        }
+    }
+
+</style>
+<!-- End Cookie Consent -->
+	<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"301e597e19","applicationID":"203847447","transactionName":"YgFbMhFWDxIHWkNRVltLeAUXXg4PSUlWX1w=","queueTime":0,"applicationTime":422,"atts":"TkZYRFlMHBw=","errorBeacon":"bam.nr-data.net","agent":""}</script></body>
+</html>
