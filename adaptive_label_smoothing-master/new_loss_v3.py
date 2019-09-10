@@ -14,7 +14,7 @@ import datetime
 import shutil
 from net_10 import Net
 
-def train(args, model, device, train_loader, optimizer, epoch, eps=9.9):
+def train(args, model, device, train_loader, optimizer, epoch, eps=9.9,nums=10):
     model.train()
    # for batch_idx, (data, target, idx, is_pure, is_corrupt) in enumerate(train_loader):
 
@@ -24,13 +24,14 @@ def train(args, model, device, train_loader, optimizer, epoch, eps=9.9):
         optimizer.zero_grad()
         output = model(data)
         output = F.softmax(output, dim=1)
-        ze=torch.zeros([128,10]).cuda()
+        ze=torch.zeros([args.batch_size,nums]).cuda()
         #print(output[:,10:20].shape,ze.shape)
         #output = output + output[:,10].unsqueeze(1)/eps
-        output = output + torch.cat([output[:,10:20],ze],1)/eps
+        output = output + torch.cat([output[:,nums:],ze],1)/eps
         #print(torch.cat([output[:,10:20],ze],1).shape)
         #output = F.softmax(output, dim=1)
-        output1 = output[:,:10].clone()
+        output1 = output[:,:nums].clone()
+        output1 = torch.log(output1)
         output1 = F.softmax(output1,dim=1)
         output1 = torch.log(output1)
         loss = F.nll_loss(output1, target)
@@ -44,7 +45,7 @@ def train(args, model, device, train_loader, optimizer, epoch, eps=9.9):
                 100. * batch_idx / len(train_loader), loss.item()))
     return loss.item(), torch.mean(output[:,10])
 
-def test(args, model, device, test_loader):
+def test(args, model, device, test_loader,nums):
     model.eval()
     test_loss = 0
     correct = 0
@@ -54,7 +55,7 @@ def test(args, model, device, test_loader):
             data, target = data.to(device), target.to(device)
             output = model(data)
             test_loss += F.nll_loss(output, target, reduction='sum').item() # sum up batch loss
-            pred = output[:,:10].argmax(dim=1, keepdim=True) # get the index of the max log-probability
+            pred = output[:,:nums].argmax(dim=1, keepdim=True) # get the index of the max log-probability
             correct += pred.eq(target.view_as(pred)).sum().item()
 
     test_loss /= len(test_loader.dataset)
@@ -201,7 +202,8 @@ def main():
     #cnn1 = Net().to(device)
     #print(model.parameters)
     #optimizer1 = torch.optim.SGD(cnn1.parameters(), lr=learning_rate)
-    optimizer = torch.optim.SGD(cnn1.parameters(), lr=args.lr, momentum=args.momentum)
+    optimizer = torch.optim.Adam(cnn1.parameters(), lr=args.lr)
+    #optimizer = torch.optim.SGD(cnn1.parameters(), lr=args.lr, momentum=args.momentum)
     
     
 
@@ -212,15 +214,15 @@ def main():
     out=[]
     for epoch in range(1, args.n_epoch + 1):
         if epoch<20:
-            l1,out10=train(args, cnn1, device, train_loader, optimizer, epoch,eps=args.eps)
+            l1,out10=train(args, cnn1, device, train_loader, optimizer, epoch,eps=args.eps, nums=num_classes)
             loss.append(l1)
             out.append(out10)
-            acc.append(test(args, cnn1, device, test_loader))
+            acc.append(test(args, cnn1, device, test_loader,num_classes))
         else:
-            l1,out10=train(args, cnn1, device, train_loader, optimizer, epoch,eps=args.eps)
+            l1,out10=train(args, cnn1, device, train_loader, optimizer, epoch,eps=args.eps,num=num_classes)
             loss.append(l1)
             out.append(out10)
-            acc.append(test(args, cnn1, device, test_loader))
+            acc.append(test(args, cnn1, device, test_loader,num_classes))
         #loss.append(train(args, model, device, train_loader, optimizer, epoch, eps=9.3))
         #l1=train(args, cnn1, device, train_loader, optimizer, epoch,eps=4.9)
         #loss.append(l1)
