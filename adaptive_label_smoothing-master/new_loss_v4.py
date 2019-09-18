@@ -12,7 +12,29 @@ import argparse, sys
 import numpy as np
 import datetime
 import shutil
-from net import Net
+#from net import Net
+
+
+
+class Net(nn.Module):
+    def __init__(self):
+        super(Net, self).__init__()
+        self.accuracy=[]
+        self.conv1 = nn.Conv2d(1, 20, 5, 1)
+        self.conv2 = nn.Conv2d(20, 50, 5, 1)
+        self.fc1 = nn.Linear(800, 500)
+        self.fc2 = nn.Linear(500, 11)
+
+    def forward(self, x):
+        x = F.relu(self.conv1(x))
+        x = F.max_pool2d(x, 2, 2)
+        x = F.relu(self.conv2(x))
+        x = F.max_pool2d(x, 2, 2)
+        x = x.view(-1, 800)
+        #x = x.view(x.size(0), x.size(1))
+        x = F.relu(self.fc1(x))
+        x = self.fc2(x)
+        return x#F.log_softmax(x, dim=1)
 
 def train(args, model, device, train_loader, optimizer, epoch, eps=9.9,nums=10):
     model.train()
@@ -28,7 +50,6 @@ def train(args, model, device, train_loader, optimizer, epoch, eps=9.9,nums=10):
         loss = F.nll_loss(output, target)
         loss_a.append(loss.item())
         loss.backward()
-        #optimizer.module.step()
         optimizer.step()
 
         if batch_idx % args.log_interval == 0:
@@ -207,15 +228,20 @@ def main():
     loss_pure=[]
     loss_corrupt=[]
     out=[]
+    eee=1-args.noise_rate
+    criteria =(-1)* (eee * np.log(eee) + (1-eee) * np.log((1-eee)/(args.eps-1)))
     for epoch in range(1, args.n_epoch + 1):
         l1,out10=train(args, cnn1, device, train_loader, optimizer, epoch, eps=args.eps, nums=num_classes)
         loss.append(l1)
         out.append(out10)
         acc.append(test(args, cnn1, device, test_loader,num_classes))
+        print(l1,criteria)
+        if l1<criteria:
+            break;
     
-    name="cifar10 "+str(args.dataset)+" "+str(args.noise_type)+" "+str(args.noise_rate)+" "+str(args.eps)
-    np.save(name+" acc.npy",acc)
-    np.save(name+" loss.npy",loss)
+    name=str(args.dataset)+" "+str(args.noise_type)+" "+str(args.noise_rate)+" "+str(args.eps)+" "+str(args.seed)
+    np.save("early_stopping/"+name+" acc.npy",acc)
+    np.save("early_stopping/"+name+" loss.npy",loss)
 
 if __name__=='__main__':
     main()
