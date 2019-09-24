@@ -208,7 +208,7 @@ def main():
     else:
         forget_rate=args.forget_rate
 
-    noise_or_not = train_dataset.noise_or_not
+    #noise_or_not = train_dataset.noise_or_not
     
     print('loading dataset...')
     train_loader = torch.utils.data.DataLoader(dataset=train_dataset,
