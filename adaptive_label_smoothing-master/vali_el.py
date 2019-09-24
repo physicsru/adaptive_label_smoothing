@@ -24,7 +24,7 @@ def random_split(dataset, lengths):
     if sum(lengths) != len(dataset):
         raise ValueError("Sum of input lengths does not equal the length of the input dataset!")
 
-    indices = randperm(sum(lengths)).tolist()
+    indices = torch.randperm(sum(lengths)).tolist()
     return [Subset(dataset, indices[offset - length:offset]) for offset, length in zip(_accumulate(lengths), lengths)]
 
 class Net(nn.Module):
@@ -144,9 +144,9 @@ def main():
                                     noise_type=args.noise_type,
                                     noise_rate=args.noise_rate
                              )
-        train_size = int(0.1 * len(train_dataset))
-        test_size = len(train_dataset) - train_size
-        train_dataset, test_dataset = random_split(train_dataset, [train_size, test_size])
+        train_size = int(0.9 * len(train_dataset))
+        valid_size = len(train_dataset) - train_size
+        train_dataset, valid_dataset = random_split(train_dataset, [train_size, valid_size])
 
         test_dataset = MNIST(root='./data/',
                                    download=True,  
