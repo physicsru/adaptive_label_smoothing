@@ -146,7 +146,7 @@ def main():
                              )
         train_size = int(0.1 * len(train_dataset))
         test_size = len(train_dataset) - train_size
-        train_dataset, test_dataset = torch.utils.data.random_split(full_dataset, [train_size, test_size])
+        train_dataset, test_dataset = random_split(train_dataset, [train_size, test_size])
 
         test_dataset = MNIST(root='./data/',
                                    download=True,  
