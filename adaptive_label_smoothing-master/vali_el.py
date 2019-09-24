@@ -231,8 +231,6 @@ def main():
     cnn1 = Net().to(device)
     optimizer = torch.optim.SGD(cnn1.parameters(), lr=args.lr, momentum=args.momentum)
 
-    train_loader = 
-    
     acc=[]
     loss=[]
     loss_pure=[]
