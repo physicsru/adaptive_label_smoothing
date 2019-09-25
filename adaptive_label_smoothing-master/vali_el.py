@@ -243,17 +243,18 @@ def main():
     criteria =(-1)* (eee * np.log(eee) + (1-eee) * np.log((1-eee)/(args.eps-1)))
     last=float("inf")
     count=0
-    for epoch in range(1, args.n_epoch + 1):
+    
+    for epoch in range(1, 51):
         l1,out10=train(args, cnn1, device, train_loader, optimizer, epoch, eps=args.eps, nums=num_classes)
         cur,out101=train(args, cnn1, device, valid_loader, optimizer, epoch, eps=args.eps, nums=num_classes)
-        if cur>last:
-            count+=1
-        else:
-            last=cur
-            count=0
-        if count >= 4:
-            break;
-        loss.append(l1)
+        #if cur>last:
+        #    count+=1
+        #else:
+        #    last=cur
+        #    count=0
+        #if count >= 4:
+        #    break;
+        loss.append(cur)
         out.append(out10)
         acc.append(test(args, cnn1, device, test_loader,num_classes))
     
