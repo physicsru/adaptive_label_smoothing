@@ -244,7 +244,7 @@ def main():
     last=float("inf")
     count=0
     
-    for epoch in range(1, 51):
+    for epoch in range(1, 50):
         l1,out10=train(args, cnn1, device, train_loader, optimizer, epoch, eps=args.eps, nums=num_classes)
         cur,out101=train(args, cnn1, device, valid_loader, optimizer, epoch, eps=args.eps, nums=num_classes)
         #if cur>last:
