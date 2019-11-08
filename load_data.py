@@ -30,6 +30,15 @@ def load_dataset(test_sen=None):
     TEXT = data.Field(sequential=True, tokenize=tokenize, lower=True, include_lengths=True, batch_first=True, fix_length=200)
     LABEL = data.LabelField() #tensor_type=torch.FloatTensor)
     train_data, test_data = datasets.IMDB.splits(TEXT, LABEL)
+    
+    l = [i for i in range(25000)]
+    sample = random.sample(l,int(25000*noise_rate))
+    print(len(sample))
+    for i in sample:
+        if train_data[i].label=='pos': train_data[i].label='neg'
+        else: train_data[i].label='pos'
+
+    
     TEXT.build_vocab(train_data, vectors=GloVe(name='6B', dim=300))
     LABEL.build_vocab(train_data)
 
