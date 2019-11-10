@@ -216,10 +216,18 @@ embedding_length = 300
 model = LSTMClassifier(batch_size, output_size+1, hidden_size, vocab_size, embedding_length, word_embeddings)
 loss_fn = F.cross_entropy
 
-for epoch in range(100):
-    train_loss, train_acc = train_model(model, train_iter, epoch)
+tr_loss=[]
+te_acc=[]
+
+for epoch in range(200):
+    if epoch < 5:
+        train_loss, train_acc = train_model(model, train_iter, epoch, 2)
+    else:
+        train_loss, train_acc = train_model(model, train_iter, epoch, 1.9)
     val_loss, val_acc = eval_model(model, valid_iter)
-    
+    tr_loss.append(train_loss)
+    te_acc.append(val_acc)
+    if train_loss<criteria: break;
     print('Epoch:', epoch+1, 'Train Loss:', train_loss, 'Train Acc:', train_acc, 'Val. Loss:', val_loss, 'Val. Acc:', val_acc)
     
 test_loss, test_acc = eval_model(model, test_iter)
