@@ -121,11 +121,11 @@ class CIFAR10(data.Dataset):
         """
         if self.train:
             if self.noise_type !='clean':
-                img, target = self.train_data[index], self.train_noisy_labels[index]
+                img, target, kind = self.train_data[index], self.train_noisy_labels[index], self.train_labels[index]==self.train_noisy_labels[index]
             else:
-                img, target = self.train_data[index], self.train_labels[index]
+                img, target, kind = self.train_data[index], self.train_labels[index], True
         else:
-            img, target = self.test_data[index], self.test_labels[index]
+            img, target, kind = self.test_data[index], self.test_labels[index], True
 
         # doing this so that it is consistent with all other datasets
         # to return a PIL Image
@@ -137,7 +137,7 @@ class CIFAR10(data.Dataset):
         if self.target_transform is not None:
             target = self.target_transform(target)
 
-        return img, target, index
+        return img, target, index, kind
 
     def __len__(self):
         if self.train:
