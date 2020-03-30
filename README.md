@@ -1,6 +1,9 @@
 # adaptive_label_smoothing
 cis.upenn.edu/~jean/math-deep.pdf
 https://www.slideshare.net/EmanueleGhelfi/gan-theory-and-applications-143737572
+
+https://github.com/mathematical-tours/mathematical-tours.github.io/tree/master/book-sources
+
 0.1
 array([0.69126611, 0.69304717, 0.67580126, 0.56742386, 0.51986757,
        0.48476232, 0.44430657, 0.39495975, 0.33978941, 0.28125768,
