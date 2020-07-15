@@ -187,3 +187,36 @@ baseline
 0.2 78.25
 0.3 75.06
 
+def TrainFloatingLoss(epoch):
+    print('\nEpoch: %d' % epoch)
+    net.train()
+    train_loss = 0
+    correct = 0
+    total = 0
+    for batch_idx, (inputs, targets, index) in enumerate(trainloader):
+        y_prob_mb = proportion_compute(targets)
+        inputs, targets = inputs.to(device), targets.to(device)
+        optimizer.zero_grad()
+        outputs = net(inputs)
+        #loss = torch.sum(outputs, 1)
+        loss = 0;
+        _, predicted = outputs.max(1)
+        psyudolabel = torch.from_numpy(np.array([1 for t in range(len(index))])).to(device)
+        #print(psyudolabel)
+        for i in range(n_class):
+            #print(float((predicted==i).sum()) / float(len(index)), y_prob_mb[i], float((predicted==i).sum()) / float(len(index)) <= y_prob_mb[i])
+            if float((predicted==i).sum()) / float(len(index)) <= y_prob_mb[i]:
+                loss += criterion(outputs, psyudolabel * i)
+            else:
+                loss -= criterion(outputs, psyudolabel * i)
+        #loss = criterion(outputs, targets)
+        loss /= (n_class + 1)
+        loss.backward()
+        optimizer.step()
+        train_loss += loss.item()
+
+        total += targets.size(0)
+        correct += predicted.eq(targets).sum().item()
+
+        progress_bar(batch_idx, len(trainloader), 'Loss: %.3f | Acc: %.3f%% (%d/%d)'
+                     % (train_loss/(batch_idx+1), 100.*correct/total, correct, total))
