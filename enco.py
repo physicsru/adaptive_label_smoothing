@@ -30,3 +30,19 @@ for batch_idx, (data, target) in enumerate(train_loader):
     output = model(data)
     print(output)
 
+class VGGNet(nn.Module):
+    def __init__(self):
+        """Select conv1_1 ~ conv5_1 activation maps."""
+        super(VGGNet, self).__init__()
+        #self.vgg = models.vgg19_bn(pretrained=True)
+        resnet50 = models.resnet50(pretrained=True)
+        self.features = nn.ModuleList(resnet50.children())[:-1]
+        self.features = nn.Sequential(*self.features)
+        #self.vgg_features = self.vgg.features
+        #self.fc_features = nn.Sequential(*list(self.vgg.classifier.children())[:-2])
+
+    def forward(self, x):
+        """Extract multiple convolutional feature maps."""
+        features = self.features(x).view(x.shape[0], -1)
+        #features = self.fc_features(features)
+        return features
