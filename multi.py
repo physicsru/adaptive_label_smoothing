@@ -1,3 +1,132 @@
+def train_model(model, data_loaders, optimizer, alpha, beta, device="cpu", num_epochs=500):
+    since = time.time()
+    # device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    batch_size = 4096
+    temperature = 0.37#0.37 best now
+    base_temperature = 0.07 #0.1 best now
+    test_img_acc_history = []
+    test_txt_acc_history = []
+    epoch_loss_history =[]
+
+    best_model_wts = copy.deepcopy(model.state_dict())
+    best_acc = 0.0
+
+    for epoch in range(num_epochs):
+        #adjust_learning_rate(optimizer, epoch)
+        print('Epoch {}/{}'.format(epoch+1, num_epochs))
+        print('-' * 20)
+
+        # Each epoch has a training and validation phase
+        for phase in ['train', 'test']:
+            if phase == 'train':
+                # Set model to training mode
+                model.train()
+            else:
+                # Set model to evaluate mode
+                model.eval()
+
+            running_loss = 0.0
+            running_corrects_img = 0
+            running_corrects_txt = 0
+            # Iterate over data.
+            for idx,(imgs, txts, labels) in enumerate(data_loaders[phase]):
+                #warmup_learning_rate(epoch, idx, len(data_loaders[phase]), optimizer)
+                # imgs = imgs.to(device)
+                # txts = txts.to(device)
+                # labels = labels.to(device)
+                if torch.sum(imgs != imgs)>1 or torch.sum(txts != txts)>1:
+                    print("Data contains Nan.")
+
+                # zero the parameter gradients
+                optimizer.zero_grad()
+
+                # forward
+                # track history if only in train
+                with torch.set_grad_enabled(phase == 'train'):
+                    # Get model outputs and calculate loss
+                    # Special case for inception because in training it has an auxiliary output. In train
+                    #   mode we calculate the loss by summing the final output and the auxiliary output
+                    #   but in testing we only consider the final output.
+                    if torch.cuda.is_available():
+                        imgs = imgs.cuda()
+                        txts = txts.cuda()
+                        labels = labels.cuda()
+
+
+                    # zero the parameter gradients
+                    optimizer.zero_grad()
+
+                    # Forward
+                    view1_feature, view2_feature, view1_predict, view2_predict = model(imgs, txts)
+
+                    if (epoch < 500):
+                        loss = calc_loss1(view1_feature, view2_feature, view1_predict, view2_predict, labels, labels, alpha, beta, device, temperature, base_temperature, batch_size)
+                    else:
+                        loss = calc_loss(view1_feature, view2_feature, view1_predict, view2_predict, labels, labels, alpha, beta)
+
+                    img_preds = view1_predict
+                    txt_preds = view2_predict
+
+                    # backward + optimize only if in training phase
+                    if phase == 'train':
+                        loss.backward()
+                        optimizer.step()
+
+                # statistics
+                running_loss += loss.item()
+                running_corrects_img += torch.sum(torch.argmax(img_preds, dim=1) == torch.argmax(labels, dim=1))
+                running_corrects_txt += torch.sum(torch.argmax(txt_preds, dim=1) == torch.argmax(labels, dim=1))
+
+            epoch_loss = running_loss / len(data_loaders[phase].dataset)
+            # epoch_img_acc = running_corrects_img.double() / len(data_loaders[phase].dataset)
+            # epoch_txt_acc = running_corrects_txt.double() / len(data_loaders[phase].dataset)
+            t_imgs, t_txts, t_labels = [], [], []
+            with torch.no_grad():
+                for imgs, txts, labels in data_loaders['test']:
+                    if torch.cuda.is_available():
+                            imgs = imgs.cuda()
+                            txts = txts.cuda()
+                            labels = labels.cuda()
+                    if (epoch < 500):
+                        t_view1_feature, t_view2_feature, _, _ = model(imgs, txts)
+
+                    else:
+                        _, _, t_view1_feature, t_view2_feature = model(imgs, txts)
+                    t_view1_feature, t_view2_feature = normalize(t_view1_feature, 2), normalize(t_view2_feature, 2)
+                    t_imgs.append(t_view1_feature.cpu().numpy())
+                    t_txts.append(t_view2_feature.cpu().numpy())
+                    t_labels.append(labels.cpu().numpy())
+            t_imgs = np.concatenate(t_imgs)
+            t_txts = np.concatenate(t_txts)
+            t_labels = np.concatenate(t_labels).argmax(1)
+            if epoch < 500:
+                img2text = fx_calc_map_label(t_imgs, t_txts, t_labels, dist_method='COS')
+                txt2img = fx_calc_map_label(t_txts, t_imgs, t_labels, dist_method='COS')
+            else:
+                img2text = fx_calc_map_label(t_imgs, t_txts, t_labels, dist_method='COS')
+                txt2img = fx_calc_map_label(t_txts, t_imgs, t_labels, dist_method='COS')
+            print('{} Loss: {:.4f} Img2Txt: {:.4f}  Txt2Img: {:.4f}  Average: {:.4f}  Best_acc: {:.4f}'.format(phase, epoch_loss, img2text, txt2img, (img2text + txt2img) / 2, best_acc))
+
+            # deep copy the model
+            if phase == 'test' and (img2text + txt2img) / 2. > best_acc:
+                best_acc = (img2text + txt2img) / 2.
+                torch.save(model, './model_cl')
+                best_model_wts = copy.deepcopy(model.state_dict())
+            if phase == 'test':
+                test_img_acc_history.append(img2text)
+                test_txt_acc_history.append(txt2img)
+                epoch_loss_history.append(epoch_loss)
+
+        print()
+
+    time_elapsed = time.time() - since
+    print('Training complete in {:.0f}m {:.0f}s'.format(time_elapsed // 60, time_elapsed % 60))
+    print('Best average ACC: {:4f}'.format(best_acc))
+
+    # load best model weights
+    model.load_state_dict(best_model_wts)
+    return model, test_img_acc_history, test_txt_acc_history, epoch_loss_history
+
 def normalize(x, power = 2):
     norm = x.pow(power).sum(1, keepdim=True).pow(1. / power)
     out = x.div(norm)
