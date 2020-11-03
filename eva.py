@@ -1,3 +1,17 @@
+f = open('/data/coco/annotations/instances_train2017.json')
+load_dict = json.load(f)
+d = {}
+type(d)
+for i in range(len(load_dict['annotations'])):
+    if load_dict['annotations'][i]['image_id'] not in d.keys():
+        d[load_dict['annotations'][i]['image_id']] = set()
+        d[load_dict['annotations'][i]['image_id']].add(load_dict['annotations'][i]['category_id'])
+    else:
+        if type(d[load_dict['annotations'][i]['image_id']]) == type(set()):
+            d[load_dict['annotations'][i]['image_id']].add(load_dict['annotations'][i]['category_id'])
+    
+        
+
 def fx_calc_map_label(image, text, label, k = 0, dist_method='COS'):
   if dist_method == 'L2':
     dist = scipy.spatial.distance.cdist(image, text, 'euclidean')
