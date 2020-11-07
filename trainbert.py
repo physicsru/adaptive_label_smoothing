@@ -20,8 +20,6 @@ for i in range(len(load_dict['images'])):
                 t2 = load_dict['images'][k]['sentences'][kk]['raw'].lower()
                 train_examples.append(InputExample(texts=[t1, t2], label=0))
 train_examples = []
-f = open('/home/w00536717/hammer/DSCMR-master/data/dataset_flickr30k.json')
-load_dict = json.load(f)
 for i in range(len(load_dict['images'])):
     print(i)
     for j in range(5):
