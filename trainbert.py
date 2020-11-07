@@ -6,7 +6,7 @@ device = torch.device("cuda")
 #torch.cuda.set_device(5)
 model = SentenceTransformer('bert-large-nli-stsb-mean-tokens',device = device)
 train_examples = []
-f = open('/home/w00536717/hammer/DSCMR-master/data/dataset_flickr30k.json')
+f = open('/home/hammer/DSCMR-master/data/dataset_flickr30k.json')
 load_dict = json.load(f)
 for i in range(len(load_dict['images'])):
     for j in range(5):
